@@ -17,7 +17,7 @@ class Signin extends React.Component{
         this.setState({password:event.target.value});
     }
 
-    onSigninClick = () =>{
+    onSigninClick = (e) =>{
         fetch(' https://shummi-quiz-app-api.herokuapp.com/signin', {
             method:'post',
             headers:{'Content-Type':'application/json'},
@@ -36,6 +36,7 @@ class Signin extends React.Component{
                 console.log('wrng');
             }
         })
+        e.preventDefault();
     }
     hi=()=>{
         console.log('Sign-in');
@@ -45,7 +46,7 @@ render(){
 return(
 <div>
     <main className="black-80 centerVer">
-    <form className="measure center centerVer">
+    <form className="measure center centerVer" onSubmit={this.onSigninClick}>
     
         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
         <legend className="f3 w-100 fw6 ph0 mh0 centerHor">SIGN IN</legend>
@@ -62,17 +63,25 @@ return(
         </fieldset>
 
         <div className="">
-        <input className="sbutton white grow pointer"
-        onClick={this.onSigninClick} onChange={this.hi} value='Sign in'/>
+        {/* <input className="sbutton white grow pointer"
+        onClick={this.onSigninClick} onChange={this.hi} value='Sign in'/> */}
+        <input type="submit" className="sbutton white grow pointer" value="Submit" />
+        {/* <button type="submit" className="sbutton white grow pointer">Sign in</button> */}
         </div>
 
         <div className="lh-copy mt3"> 
         <p className="f6 dim black db pointer"
         onClick={()=>this.props.onRouteChange('registerPage')}>Register</p>
         </div>
+        
+    <p>Email: guest@gmail.com  <hr></hr><span>Password: guest</span></p>
+    
 
     </form>
     </main>
+{/* 
+    <p>Email: guest@gmail.com</p>
+    <p>Password: guest</p> */}
 </div>
 );
 }
